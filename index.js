@@ -4,11 +4,14 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const resumeRouter = require('./Routes/resumeRoutes');
+
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use('/resumes', resumeRouter);
 
 // DB Connection
 mongoose
