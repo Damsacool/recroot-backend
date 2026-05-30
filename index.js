@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const resumeRouter = require('./Routes/resumeRoutes');
+const interviewRoutes = require('./routes/interviewRoutes');
+app.use('/api/interviews', interviewRoutes);
 
 const app = express();
 
