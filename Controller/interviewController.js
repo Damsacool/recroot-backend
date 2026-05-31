@@ -1,5 +1,5 @@
-const Interview = require('../models/interviewModel');
-const Resume = require('../models/resumeModel');
+const Interview = require('../Model/interviewModel');
+const Resume = require('../Model/resumeModel');
 const { OpenAI } = require('openai');                
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });

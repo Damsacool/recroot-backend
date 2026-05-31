@@ -4,16 +4,16 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const resumeRouter = require('./Routes/resumeRoutes');
-const interviewRoutes = require('./routes/interviewRoutes');
-app.use('/api/interviews', interviewRoutes);
+const resumeRoutes = require('./Routes/resumeRoutes');
+const interviewRoutes = require('./Routes/interviewRoutes');
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use('/resumes', resumeRouter);
+app.use('/resumes', resumeRoutes);
+app.use('/api/interviews', interviewRoutes);
 
 // DB Connection
 mongoose

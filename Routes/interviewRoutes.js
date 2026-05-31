@@ -5,9 +5,9 @@ const {
     getCandidateInterviews,
     getInterviewById,
     deleteInterview,
-} = require('../controllers/interviewController');
+} = require('../Controller/interviewController');
 
-const protect = require('../middleware/authMiddleware'); // JWT guard
+const protect = require('../Middleware/authMiddleware'); // JWT guard
 
 router.post('/generate', protect, generateInterviewQuestions);  // Step 6 of MVP flow
 router.get('/', protect, getCandidateInterviews);               // Candidate dashboard
