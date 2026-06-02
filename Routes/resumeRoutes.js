@@ -8,9 +8,11 @@ const {
     deleteResume,
 } = require("../Controller/resumeController");
 
-router.post("/upload", uploadResume);
-router.get("/my-resumes", getMyResumes);
-router.get("/:id", getOneResume);
-router.delete("/:id", deleteResume);
+const protect = require('../Middleware/authMiddleware'); // JWT guard
+
+router.post("/upload", protect, uploadResume);
+router.get("/my-resumes", protect, getMyResumes);
+router.get("/:id", protect, getOneResume);
+router.delete("/:id", protect, deleteResume);
 
 module.exports = router;
