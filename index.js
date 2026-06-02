@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-require('dotenv').config();
+
 
 const authRoutes = require("./Routes/authRoutes");
 const resumeRoutes = require('./Routes/resumeRoutes');
