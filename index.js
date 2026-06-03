@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use("/auth", authRoutes);
 app.use('/resumes', resumeRoutes);
-app.use('/api/interviews', interviewRoutes);
+app.use('/interviews', interviewRoutes);
 
 // DB Connection
 mongoose
