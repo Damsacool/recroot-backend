@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const authRoutes = require("./Routes/authRoutes");
 const resumeRoutes = require('./Routes/resumeRoutes');
 const interviewRoutes = require('./Routes/interviewRoutes');
+const scoringRoute = require('./Routes/scoringRoutes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use('/resumes', resumeRoutes);
 app.use('/interviews', interviewRoutes);
+app.use('/scoring', scoringRoute);
 
 // DB Connection
 mongoose

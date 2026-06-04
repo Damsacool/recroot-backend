@@ -1,8 +1,10 @@
 const Interview = require('../Model/interviewModel');
 const Resume = require('../Model/resumeModel');
-const { OpenAI } = require('openai');                
+const Groq = require('groq-sdk');               
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY
+});
 
 //  Generate Interview Questions 
 const generateInterviewQuestions = async (req, res) => {
@@ -38,15 +40,14 @@ const generateInterviewQuestions = async (req, res) => {
         `;
 
         // 3. Call the AI
-        const aiResponse = await openai.chat.completions.create({
-            model: 'gpt-4o-mini',
+        const chatCompletion = await groq.chat.completions.create({
             messages: [{ role: 'user', content: prompt }],
+            model: "llama-3.3-70b-versatile",
             temperature: 0.7,
         });
 
         // 4. Parse the AI response safely
-        const rawText = aiResponse.choices[0].message.content;
-        let questions = [];
+        const rawText = chatCompletion.choices[0].message.content;
 
         try {
             questions = JSON.parse(rawText);
