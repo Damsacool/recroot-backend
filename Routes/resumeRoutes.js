@@ -8,9 +8,10 @@ const {
     deleteResume,
 } = require("../Controller/resumeController");
 
-const protect = require('../Middleware/authMiddleware'); // JWT guard
+const protect = require('../Middleware/authMiddleware'); 
+const upload = require("../Middleware/uploadMiddleware");
 
-router.post("/upload", protect, uploadResume);
+router.post("/upload", protect, upload.single("resume"), uploadResume);
 router.get("/my-resumes", protect, getMyResumes);
 router.get("/:id", protect, getOneResume);
 router.delete("/:id", protect, deleteResume);
