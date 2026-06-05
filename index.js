@@ -4,11 +4,11 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
-
 const authRoutes = require("./Routes/authRoutes");
 const resumeRoutes = require('./Routes/resumeRoutes');
 const interviewRoutes = require('./Routes/interviewRoutes');
 const scoringRoute = require('./Routes/scoringRoutes');
+const jobRoutes = require('./Routes/jobRoutes');
 
 const app = express();
 
@@ -16,10 +16,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Routes
 app.use("/auth", authRoutes);
 app.use('/resumes', resumeRoutes);
 app.use('/interviews', interviewRoutes);
 app.use('/scoring', scoringRoute);
+app.use('/jobs', jobRoutes);
 
 // DB Connection
 mongoose
@@ -27,7 +29,6 @@ mongoose
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.error("Error connection :", err));
 
-// Routes
 app.get('/', (req, res) => {
     res.send("Recroot API is running");
 });
