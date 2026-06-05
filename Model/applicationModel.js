@@ -18,7 +18,7 @@ const applicationSchema = new mongoose.Schema({
         required: [true, "Resume ID is required"],
     },
 
-    // MATCH SCORE — THE CORE FEATURE OF YOUR PLATFORM
+    // MATCH SCORE — THE CORE FEATURE OF THE PLATFORM
     matchScore: {
         type: Number,          // e.g., 87.5 (percentage)
         min: [0, "Score cannot be below 0"],

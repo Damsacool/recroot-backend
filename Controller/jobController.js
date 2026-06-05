@@ -31,32 +31,4 @@ const getUserJobs = async (req, res) => {
   }
 };
 
-// Analyze resume against job description (AI hook)
-const analyzeMatch = async (req, res) => {
-  try {
-    const { resumeText, jobDescription } = req.body;
-
-    if (!resumeText || !jobDescription) {
-      return res.status(400).json({ error: 'Resume text and job description are required.' });
-    }
-
-    // 🔧 AI logic will plug in here — placeholder for now
-    const mockResult = {
-      matchScore: 72,
-      missingSkills: ['TypeScript', 'GraphQL', 'System Design'],
-      interviewQuestions: [
-        'Walk me through a project where you optimized performance.',
-        'How do you handle state management in React?',
-        'Describe your experience with REST APIs.',
-        'How would you approach debugging a failing API endpoint?',
-        'What is your process for code reviews?'
-      ]
-    };
-
-    res.status(200).json(mockResult);
-  } catch (error) {
-    res.status(500).json({ error: 'Analysis failed.', details: error.message });
-  }
-};
-
-module.exports = { createJob, getUserJobs, analyzeMatch };
+module.exports = { createJob, getUserJobs };
