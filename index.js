@@ -8,6 +8,7 @@ const resumeRoutes = require('./Routes/resumeRoutes');
 const interviewRoutes = require('./Routes/interviewRoutes');
 const scoringRoute = require('./Routes/scoringRoutes');
 const jobRoutes = require('./Routes/jobRoutes');
+const applicationRoutes = require('./Routes/applicationRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/resumes', resumeRoutes);
 app.use('/interviews', interviewRoutes);
 app.use('/scoring', scoringRoute);
 app.use('/jobs', jobRoutes);
+app.use("/applications", applicationRoutes);
 
 // DB Connection
 mongoose
