@@ -46,6 +46,13 @@ const applyToJob = async (req, res) => {
 
             Return ONLY a JSON object in this exact format, nothing else:
             {
+                "matchScore": <overall match percentage between 0 and 100>,
+                "scoreBreakdown": {
+                    "skillsMatch": <number between 0 and 100>,
+                    "experienceMatch": <number between 0 and 100>,
+                    "educationMatch": <number between 0 and 100>,
+                    "overallFit": <number between 0 and 100>
+                },
                 "matchScore": <number between 0 and 100>,
                 "matchedSkills": [<list of skills the candidate has that match the job>],
                 "missingSkills": [<list of skills the job requires that the candidate lacks>],
@@ -71,6 +78,7 @@ const applyToJob = async (req, res) => {
             jobId,
             resumeId,
             matchScore: aiResponse.matchScore,
+            scoreBreakdown: aiResponse.scoreBreakdown,
             matchedSkills: aiResponse.matchedSkills,
             missingSkills: aiResponse.missingSkills,
             aiFeedback: aiResponse.aiFeedback,
