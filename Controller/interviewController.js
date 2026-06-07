@@ -19,25 +19,27 @@ const generateInterviewQuestions = async (req, res) => {
         }
 
         // 2. Build the AI prompt
-        const prompt = `
-            You are an expert technical interviewer.
-            
-            A candidate is applying for the role of: "${jobRole}".
-            
-            Here is their resume content:
-            "${resume.extractedText}"
-            
-            Here is the job description they are applying for:
-            "${jobDescription}"
-            
-            Based on the resume and job description:
-            - Generate 5 to 10 relevant interview questions
-            - Mix technical, behavioral, and role-specific questions
-            - Focus on gaps between the resume and the job requirements
-            - Return ONLY a JSON array of question strings, nothing else
-            
-            Example format: ["Question 1", "Question 2", "Question 3"]
-        `;
+            const prompt = `
+        You are an expert interviewer preparing questions for a job interview.
+        
+        The candidate is applying for the role of: "${jobRole}".
+        
+        Here is the job description:
+        "${jobDescription}"
+        
+        Here is the candidate's resume:
+        "${resume.extractedText}"
+        
+        Generate 5 to 10 interview questions following these rules strictly:
+        - At least 60% of questions must be based on the job description and role requirements
+        - No more than 30% of questions should reference the candidate's specific background
+        - Include questions that test if the candidate can learn and adapt to this role even if their background is different
+        - Mix technical, behavioral and situational questions relevant to the job role
+        - Do not ignore the job description in favor of the resume
+        - Return ONLY a JSON array of question strings, nothing else
+        
+        Example format: ["Question 1", "Question 2", "Question 3"]
+    `;
 
         // 3. Call the AI
         const chatCompletion = await groq.chat.completions.create({

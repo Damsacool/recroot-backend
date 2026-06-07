@@ -1,5 +1,12 @@
 const ResumeModel = require("../Model/resumeModel");
 const pdfParse = require("pdf-parse");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // To upload resume and save it
 const uploadResume = async (req, res) => {
@@ -10,6 +17,7 @@ const uploadResume = async (req, res) => {
             return res.status(400).json({ message: "Please upload a file" });
         }
 
+        // Extract text from PDF
         const pdfData = await pdfParse(req.file.buffer);
         const extractedText = pdfData.text;
 
@@ -17,9 +25,27 @@ const uploadResume = async (req, res) => {
             return res.status(400).json({ message: "Could not extract text from file" });
         }
 
+        // To upload file to Cloudinary
+        const uploadResult = await new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_stream(
+                {
+                    resource_type: "raw",
+                    folder: "recroot/resumes",
+                    public_id: `${userId}_${Date.now()}`,
+                    format: "pdf",
+                    access_mode: "public",
+                },
+                (error, result) => {
+                    if (error) reject(error);
+                    else resolve(result);
+                }
+            ).end(req.file.buffer);
+        });
+
         const resume = await ResumeModel.create({
             userId,
             fileName: req.file.originalname,
+            fileUrl: uploadResult.secure_url,
             extractedText,
         });
 
